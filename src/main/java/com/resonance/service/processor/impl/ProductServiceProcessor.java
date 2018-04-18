@@ -1,6 +1,11 @@
 package com.resonance.service.processor.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.resonance.data.repo.ProductRepository;
@@ -14,14 +19,22 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 	@Autowired
 	private ProductRepository productRepoObj;
 	
-	public void getResponse(Product model) {
-		// TODO Auto-generated method stub
-		
+	public List<Product> getResponse(Product productObj, int page, int size) {
+		Page<ProductTo> productToList = productRepoObj.findAll(PageRequest.of(page, size));
+		List<Product> productList = new ArrayList<Product>();
+		for(ProductTo productTo : productToList) {
+			productObj = new Product(productTo.getModelName(), productTo.getImgSrc(), productTo.getPrice());
+			productList.add(productObj);
+		}
+		return productList;
 	}
-
-	public void getResponseById(Product model) {
-		// TODO Auto-generated method stub
-		
+	
+	public Product getResponseById(Product productObj) {
+		ProductTo productTo = productRepoObj.findUnique(productObj.getModelName());
+		productObj.setModelName(productTo.getModelName());
+		productObj.setPrice(productTo.getPrice());
+		productObj.setImgSrc(productTo.getImgSrc());
+		return productObj;
 	}
 
 	public void postRequest(Product productObj) {		
@@ -29,17 +42,13 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 		productRepoObj.save(productTo);
 	}
 
-	public void processDelete(Product model) {
-		// TODO Auto-generated method stub
-		
+	public void processDelete(Product productObj) {
+		ProductTo productTo = new ProductTo(productObj.getModelName());
+		productRepoObj.delete(productTo);
 	}
 
 	public void processPatch(Product model) {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-	
-
 }
