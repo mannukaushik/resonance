@@ -54,7 +54,7 @@ public class ProductController implements AbstractController {
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	protected HttpEntity<?> getProducts(@RequestParam(required=false) Integer page,@RequestParam(required=false) int size, @RequestParam(required=false) String modelName, @RequestParam(required=false) String price, HttpServletRequest request, HttpServletResponse response) throws Throwable{
+	protected HttpEntity<?> getProducts(@RequestParam(required=false) Integer page,@RequestParam(required=false) Integer size, @RequestParam(required=false) String modelName, @RequestParam(required=false) String price, HttpServletRequest request, HttpServletResponse response) throws Throwable{
 		Collection collectionObj = new Collection();
 		Product productObj = new Product();
 		List<Product> productList = productServiceProcessor.getResponse(productObj, page, size);
