@@ -11,17 +11,17 @@ import com.resonance.service.processor.impl.ProductServiceProcessor;
 
 public class AppTest{
 	@Bean(name= "productServiceProcessor")
-	@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public ProductServiceProcessor productServiceProcessor() {
 		return new ProductServiceProcessor();
 	}
 	@Bean
-	@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public JacksonUtils jacksonUtils() {
 		return Mockito.mock(JacksonUtils.class);
 	}
 	@Bean
-	@Scope(scopeName=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public ProductHelper productHelper() {
 		return Mockito.mock(ProductHelper.class);
 	}

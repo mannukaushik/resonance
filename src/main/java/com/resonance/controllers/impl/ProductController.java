@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.resonance.api.elements.Collection;
+import com.resonance.api.elements.OptionsResponseEntity;
 import com.resonance.controllers.AbstractController;
 import com.resonance.helper.generic.ProductHelper;
 import com.resonance.model.impl.Product;
@@ -58,7 +60,7 @@ public class ProductController implements AbstractController {
 		Collection collectionObj = new Collection();
 		Product productObj = new Product();
 		List<Product> productList = productServiceProcessor.getResponse(productObj, page, size);
-		collectionObj.add(linkTo(methodOn(ProductController.class).getProducts(page, size, modelName, price, request, response)).withSelfRel().expand(modelName, price, request, response));
+		collectionObj.add(linkTo(methodOn(ProductController.class).getProducts(page, size, modelName, price, request, response)).withSelfRel().expand());
 		productHelper.getCollectionResults(collectionObj, "gets a product resource", "product", request.getRequestURL().toString(), Product.class, productList);
 		response.setHeader(HttpHeaders.ALLOW, "GET, OPTIONS");
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, OPTIONS");
@@ -85,5 +87,20 @@ public class ProductController implements AbstractController {
 		response.setHeader(HttpHeaders.ALLOW, "DELETE, OPTIONS");
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "DELETE, OPTIONS");
 		return new ResponseEntity<>(productObj, HttpStatus.NO_CONTENT);
+	}
+	
+	@RequestMapping(method = RequestMethod.OPTIONS, produces = MediaType.APPLICATION_JSON_VALUE)
+	public HttpEntity<?> optionsOnProducts(HttpServletRequest request, HttpServletResponse response){
+		OptionsResponseEntity optionsResponse = productHelper.getResourceResponse(request, Product.class);
+		response.setHeader(HttpHeaders.ALLOW, "GET,POST,DELETE,OPTIONS");
+		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET,POST,DELETE,OPTIONS");
+		return new ResponseEntity<>(optionsResponse, HttpStatus.OK);
+	}
+	@RequestMapping(value = "/{Id}", method = RequestMethod.OPTIONS, produces = MediaType.APPLICATION_JSON_VALUE)
+	public HttpEntity<?> optionsOnProductsId(@PathVariable("Id") String id, HttpServletRequest request, HttpServletResponse response){
+		OptionsResponseEntity optionsResponse = productHelper.getResourceResponseId(id, request, Product.class);
+		response.setHeader(HttpHeaders.ALLOW, "GET,POST,DELETE,OPTIONS");
+		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET,POST,DELETE,OPTIONS");
+		return new ResponseEntity<>(optionsResponse, HttpStatus.OK);
 	}
 }
