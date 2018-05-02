@@ -19,8 +19,17 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 	@Autowired
 	private ProductRepository productRepoObj;
 	
-	public List<Product> getResponse(Product productObj, int page, int size) {
-		Page<ProductTo> productToList = productRepoObj.findAll(PageRequest.of(page, size));
+	public List<Product> getResponse(Product productObj, Integer page, Integer size) {
+		if(page!=null && size!=null) {
+			Page<ProductTo> productToList = productRepoObj.findAll(PageRequest.of(page, size));
+			return fetchProductList(productObj, productToList);
+		}else {
+			List<ProductTo> productToList = productRepoObj.findAll();
+			return fetchProductList(productObj, productToList);
+		}
+	}
+		
+	private List<Product> fetchProductList(Product productObj, Iterable<ProductTo> productToList){
 		List<Product> productList = new ArrayList<Product>();
 		for(ProductTo productTo : productToList) {
 			productObj = new Product(productTo.getModelName(), productTo.getImgSrc(), productTo.getPrice());
@@ -48,7 +57,6 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 	}
 
 	public void processPatch(Product model) {
-		// TODO Auto-generated method stub
 		
 	}
 }
