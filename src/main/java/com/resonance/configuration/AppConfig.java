@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.resonance.api.elements.JacksonUtils;
 import com.resonance.api.elements.SchemaGenerator;
 import com.resonance.helper.generic.ProductHelper;
+import com.resonance.helper.generic.SpecificationHelper;
 import com.resonance.service.processor.impl.ProductServiceProcessor;
 
 @Configuration
@@ -38,6 +39,11 @@ public class AppConfig  extends WebSecurityConfigurerAdapter implements WebMvcCo
 	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public ProductHelper productHelper() {
 		return new ProductHelper();
+	}
+	@Bean
+	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	public SpecificationHelper SpecificationHelper() {
+		return new SpecificationHelper();
 	}
 	@Bean
 	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)

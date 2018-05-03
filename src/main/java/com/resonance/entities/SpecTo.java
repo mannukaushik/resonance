@@ -36,6 +36,11 @@ public class SpecTo implements MongoEntity{
 		super();
 	}
 	
+	public SpecTo(String modelName) {
+		super();
+		this.modelName = modelName;
+	}
+	
 	public SpecTo(String modelName, String playbackMedia, String antenna, int stationPresets, String tunerBands, int packagingHeight,
 			int packagingWidth, int packagingDepth, int powerSupply, int numberOfSpeakers,
 			String loudspeakerEnhancement, String speakerTypes, String soundPower, int headphone, String microPhone,
