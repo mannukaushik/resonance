@@ -52,7 +52,7 @@ public class SpecServiceProcessor implements ServiceProcessor<Specification>  {
 
 	@Override
 	public void postRequest(Specification specObj) {
-		SpecTo specTo = new SpecTo(specObj.getModelName(), specObj.getPlaybackMedia(), specObj.getAntenna(), specObj.getStationPresets(), specObj.getTunerBands(), specObj.getPackagingHeight(), specObj.getPackagingWidth(), specObj.getPackagingDepth(), specObj.getPowerSupply(), specObj.getNumberOfSpeakers(), specObj.getLoudspeakerEnhancement(), specObj.getSpeakerTypes(),  specObj.getSoundPower(), specObj.getHeadphone(), specObj.getMicroPhone(), specObj.getUsb(), specObj.getMp3Link(), specObj.getRmtctrl(), specObj.getUserManual(), specObj.getWarranty());
+		SpecTo specTo = new SpecTo(specObj.getModelName(), specObj.getPlaybackMedia(), specObj.getAntenna(), specObj.getStationPresets(), specObj.getTunerBands(), specObj.getPackagingHeight(), specObj.getPackagingWidth(), specObj.getPackagingDepth(), specObj.getPowerSupply(), specObj.getNumberOfSpeakers(), specObj.getLoudspeakerEnhancement(), specObj.getSpeakerTypes(),  specObj.getSoundPower(), specObj.getHeadphone(), specObj.getMicroPhone(), specObj.getUsb(), specObj.getMp3Link(), specObj.getRmtctrl(), specObj.getUserManual(), specObj.getWarranty(), specObj.getPlaybackModes(), specObj.getTuner(), specObj.getDisplayType(), specObj.getCompatibleWith(), specObj.getSoundEnc(), specObj.getCables(), specObj.getOthers());
 		specRepoObj.save(specTo);
 		
 	}
@@ -82,7 +82,7 @@ public class SpecServiceProcessor implements ServiceProcessor<Specification>  {
 	private List<Specification> fetchSpecificationList(Specification specObj, Iterable<SpecTo> SpecToList){
 		List<Specification> specList = new ArrayList<Specification>();
 		for(SpecTo specTo : SpecToList) {
-			specObj = new Specification(specTo.getModelName(), specTo.getPlaybackMedia(), specTo.getAntenna(), specTo.getStationPresets(), specTo.getTunerBands(), specTo.getPackagingHeight(), specTo.getPackagingWidth(), specTo.getPackagingDepth(), specTo.getPowerSupply(), specTo.getNumberOfSpeakers(), specTo.getLoudspeakerEnhancement(), specTo.getSpeakerTypes(),  specTo.getSoundPower(), specTo.getHeadphone(), specTo.getMicroPhone(), specTo.getUsb(), specTo.getMp3Link(), specTo.getRmtctrl(), specTo.getUserManual(), specTo.getWarranty());
+			specObj = new Specification(specTo.getModelName(), specTo.getPlaybackMedia(), specTo.getAntenna(), specTo.getStationPresets(), specTo.getTunerBands(), specTo.getPackagingHeight(), specTo.getPackagingWidth(), specTo.getPackagingDepth(), specTo.getPowerSupply(), specTo.getNumberOfSpeakers(), specTo.getLoudspeakerEnhancement(), specTo.getSpeakerTypes(),  specTo.getSoundPower(), specTo.getHeadphone(), specTo.getMicroPhone(), specTo.getUsb(), specTo.getMp3Link(), specTo.getRmtctrl(), specTo.getUserManual(), specTo.getWarranty(), specTo.getPlaybackModes(), specTo.getTuner(), specTo.getDisplayType(), specTo.getCompatibleWith(), specTo.getSoundEnc(), specTo.getCables(), specTo.getOthers());
 			specList.add(specObj);
 		}
 		return specList;
