@@ -1,5 +1,7 @@
 package com.resonance.entities;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -31,6 +33,13 @@ public class SpecTo implements MongoEntity{
 	private int rmtctrl;
 	private int userManual;
 	private String warranty;
+	private List<String> playbackModes;
+	private List<String> tuner;
+	private List<String> displayType;
+	private List<String> compatibleWith;
+	private List<String> soundEnc;
+	private List<String> cables;
+	private List<String> others;
 	
 	public SpecTo() {
 		super();
@@ -41,10 +50,12 @@ public class SpecTo implements MongoEntity{
 		this.modelName = modelName;
 	}
 	
-	public SpecTo(String modelName, String playbackMedia, String antenna, int stationPresets, String tunerBands, int packagingHeight,
-			int packagingWidth, int packagingDepth, int powerSupply, int numberOfSpeakers,
+	public SpecTo(String modelName, String playbackMedia, String antenna, int stationPresets, String tunerBands,
+			int packagingHeight, int packagingWidth, int packagingDepth, int powerSupply, int numberOfSpeakers,
 			String loudspeakerEnhancement, String speakerTypes, String soundPower, int headphone, String microPhone,
-			String usb, String mp3Link, int rmtctrl, int userManual, String warranty) {
+			String usb, String mp3Link, int rmtctrl, int userManual, String warranty, List<String> playbackModes,
+			List<String> tuner, List<String> displayType, List<String> compatibleWith, List<String> soundEnc,
+			List<String> cables, List<String> others) {
 		super();
 		this.modelName = modelName;
 		this.playbackMedia = playbackMedia;
@@ -66,7 +77,15 @@ public class SpecTo implements MongoEntity{
 		this.rmtctrl = rmtctrl;
 		this.userManual = userManual;
 		this.warranty = warranty;
+		this.playbackModes = playbackModes;
+		this.tuner = tuner;
+		this.displayType = displayType;
+		this.compatibleWith = compatibleWith;
+		this.soundEnc = soundEnc;
+		this.cables = cables;
+		this.others = others;
 	}
+
 	public String getModelName() {
 		return modelName;
 	}
@@ -187,6 +206,47 @@ public class SpecTo implements MongoEntity{
 	public void setWarranty(String warranty) {
 		this.warranty = warranty;
 	}
-	
+	public List<String> getPlaybackModes() {
+		return playbackModes;
+	}
+	public void setPlaybackModes(List<String> playbackModes) {
+		this.playbackModes = playbackModes;
+	}
+	public List<String> getTuner() {
+		return tuner;
+	}
+	public void setTuner(List<String> tuner) {
+		this.tuner = tuner;
+	}
+	public List<String> getDisplayType() {
+		return displayType;
+	}
+	public void setDisplayType(List<String> displayType) {
+		this.displayType = displayType;
+	}
+	public List<String> getCompatibleWith() {
+		return compatibleWith;
+	}
+	public void setCompatibleWith(List<String> compatibleWith) {
+		this.compatibleWith = compatibleWith;
+	}
+	public List<String> getSoundEnc() {
+		return soundEnc;
+	}
+	public void setSoundEnc(List<String> soundEnc) {
+		this.soundEnc = soundEnc;
+	}
+	public List<String> getCables() {
+		return cables;
+	}
+	public void setCables(List<String> cables) {
+		this.cables = cables;
+	}
+	public List<String> getOthers() {
+		return others;
+	}
+	public void setOthers(List<String> others) {
+		this.others = others;
+	}
 
 }

@@ -42,7 +42,7 @@ public class AppConfig  extends WebSecurityConfigurerAdapter implements WebMvcCo
 	}
 	@Bean
 	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-	public SpecificationHelper SpecificationHelper() {
+	public SpecificationHelper specificationHelper() {
 		return new SpecificationHelper();
 	}
 	@Bean
