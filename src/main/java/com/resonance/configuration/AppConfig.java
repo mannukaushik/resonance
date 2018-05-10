@@ -17,7 +17,6 @@ import com.resonance.api.elements.JacksonUtils;
 import com.resonance.api.elements.SchemaGenerator;
 import com.resonance.helper.generic.ProductHelper;
 import com.resonance.helper.generic.SpecificationHelper;
-import com.resonance.service.processor.impl.ProductServiceProcessor;
 
 @Configuration
 @EnableSpringDataWebSupport
@@ -25,11 +24,6 @@ import com.resonance.service.processor.impl.ProductServiceProcessor;
 @EnableHypermediaSupport(type = {HypermediaType.HAL})
 public class AppConfig  extends WebSecurityConfigurerAdapter implements WebMvcConfigurer{
 
-	@Bean(name= "productServiceProcessor")
-	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-	public ProductServiceProcessor productServiceProcessor() {
-		return new ProductServiceProcessor();
-	}
 	@Bean
 	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public JacksonUtils jacksonUtils() {
