@@ -39,6 +39,7 @@ public class ProductControllerTest {
 
 	@Mock
 	private ServiceProcessor<Product> productServiceProcessor;
+	
 	Product product = new Product();
 
 	@Before

@@ -56,11 +56,12 @@ public class ProductController implements AbstractController {
 	}
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	protected HttpEntity<?> getProducts(@RequestParam(required=false) Integer page,@RequestParam(required=false) Integer size, @RequestParam(required=false) String modelName, @RequestParam(required=false) String price, HttpServletRequest request, HttpServletResponse response) throws Throwable{
+	protected HttpEntity<?> getProducts(@RequestParam(required=false) Integer page,@RequestParam(required=false) Integer size, @RequestParam(required=false) String modelName, @RequestParam(required=false) String price,@RequestParam(required=false) String type, HttpServletRequest request, HttpServletResponse response) throws Throwable{
 		Collection collectionObj = new Collection();
 		Product productObj = new Product();
+		productObj.setType(type);
 		List<Product> productList = productServiceProcessor.getResponse(productObj, page, size);
-		collectionObj.add(linkTo(methodOn(ProductController.class).getProducts(page, size, modelName, price, request, response)).withSelfRel().expand());
+		collectionObj.add(linkTo(methodOn(ProductController.class).getProducts(page, size, modelName, price, type, request, response)).withSelfRel().expand());
 		productHelper.getCollectionResults(collectionObj, "gets a product resource", "product", request.getRequestURL().toString(), Product.class, productList);
 		response.setHeader(HttpHeaders.ALLOW, "GET, OPTIONS");
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, OPTIONS");

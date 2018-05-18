@@ -8,27 +8,29 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.resonance.api.annotations.SummaryProperty;
 import com.resonance.model.Model;
 
+@SuppressWarnings("serial")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Product extends ResourceSupport implements Serializable,Model {
-	
-	private static final long serialVersionUID = 1L;
-	
+		
 	@SummaryProperty
 	private String modelName;
 	@SummaryProperty
 	private String price;
 	@SummaryProperty
 	private String imgSrc;
+	@SummaryProperty
+	private String type;
 	
 	public Product() {
 		super();
 	}
 
-	public Product(String modelName, String price, String imgSrc) {
+	public Product(String modelName, String price, String imgSrc, String type) {
 		super();
 		this.modelName = modelName;
 		this.price = price;
 		this.imgSrc = imgSrc;
+		this.type = type;
 	}
 
 	public String getImgSrc() {
@@ -56,6 +58,14 @@ public class Product extends ResourceSupport implements Serializable,Model {
 		this.modelName = modelName;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	public String generateIdFromModel() {
 		return this.modelName;
 	}
@@ -63,4 +73,5 @@ public class Product extends ResourceSupport implements Serializable,Model {
 	public void setUpModelFromId() {
 	
 	}
+
 }

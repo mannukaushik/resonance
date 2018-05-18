@@ -2,6 +2,7 @@ package com.resonance.service.processor.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,10 +21,20 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 	private ProductRepository productRepoObj;
 	
 	public List<Product> getResponse(Product productObj, Integer page, Integer size) {
-		if(page!=null && size!=null) {
+		Optional<String> productOptionalObj = Optional.ofNullable(productObj.getType());
+		if(page!=null && size!=null && !productOptionalObj.isPresent()) {
 			Page<ProductTo> productToList = productRepoObj.findAll(PageRequest.of(page, size));
 			return fetchProductList(productObj, productToList);
-		}else {
+		}
+		else if(page != null && size != null && productOptionalObj.isPresent()) {
+			Page<ProductTo> productToList = productRepoObj.findPagedTypes(productObj.getType(),PageRequest.of(page, size));
+			return fetchProductList(productObj, productToList);
+		}
+		else if(productOptionalObj.isPresent()){
+			List<ProductTo> productToList = productRepoObj.findTypes(productObj.getType());
+			return fetchProductList(productObj, productToList);
+		}
+		else {
 			List<ProductTo> productToList = productRepoObj.findAll();
 			return fetchProductList(productObj, productToList);
 		}
@@ -32,7 +43,7 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 	private List<Product> fetchProductList(Product productObj, Iterable<ProductTo> productToList){
 		List<Product> productList = new ArrayList<Product>();
 		for(ProductTo productTo : productToList) {
-			productObj = new Product(productTo.getModelName(), productTo.getImgSrc(), productTo.getPrice());
+			productObj = new Product(productTo.getModelName(), productTo.getImgSrc(), productTo.getPrice(),productTo.getType());
 			productList.add(productObj);
 		}
 		return productList;
@@ -43,11 +54,12 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 		productObj.setModelName(productTo.getModelName());
 		productObj.setPrice(productTo.getPrice());
 		productObj.setImgSrc(productTo.getImgSrc());
+		productObj.setType(productTo.getType());
 		return productObj;
 	}
 
 	public void postRequest(Product productObj) {		
-		ProductTo productTo = new ProductTo(productObj.getModelName(), productObj.getPrice(), productObj.getImgSrc());
+		ProductTo productTo = new ProductTo(productObj.getModelName(), productObj.getPrice(), productObj.getImgSrc(),productObj.getType());
 		productRepoObj.save(productTo);
 	}
 

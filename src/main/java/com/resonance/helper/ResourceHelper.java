@@ -47,11 +47,12 @@ public abstract class ResourceHelper<ModelImpl extends Model, Rq, T extends Obje
 	}
 	private void generateSchema(OptionsLink optionsLink, Class<ModelImpl> className) {
 		try {
-			schemGenerator.SchemaGeneratorHandler(className, "");
+			optionsLink.setSchema(schemGenerator.SchemaGeneratorHandler(className, ""));
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
+	
 
 }
