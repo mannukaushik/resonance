@@ -3,13 +3,15 @@ package com.resonance.model.impl;
 import java.io.Serializable;
 
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.resonance.api.annotations.SummaryProperty;
 import com.resonance.model.Model;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Product extends ResourceSupport implements Serializable,Model {
+public class Product extends ResourceSupport implements Serializable,Model,Validator {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -62,5 +64,16 @@ public class Product extends ResourceSupport implements Serializable,Model {
 
 	public void setUpModelFromId() {
 	
+	}
+
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return Product.class.isAssignableFrom(clazz); 
+	}
+
+	@Override
+	public void validate(Object target, Errors errors) {
+		// TODO Auto-generated method stub
+		
 	}
 }
