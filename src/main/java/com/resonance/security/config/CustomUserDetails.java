@@ -40,7 +40,7 @@ public class CustomUserDetails implements UserDetails {
      * @param roles the input list of roles.
      * @return a list of granted authorities
      */
-    @SuppressWarnings("unused")
+    
 	private Collection<? extends GrantedAuthority> translate(List<Role> roles) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (Role role : roles) {

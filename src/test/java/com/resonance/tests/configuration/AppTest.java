@@ -15,6 +15,11 @@ public class AppTest{
 	public ProductServiceProcessor productServiceProcessor() {
 		return new ProductServiceProcessor();
 	}
+	@Bean(name= "overviewServiceProcessor")
+	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+	public ProductServiceProcessor overviewServiceProcessor() {
+		return new ProductServiceProcessor();
+	}
 	@Bean
 	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public JacksonUtils jacksonUtils() {

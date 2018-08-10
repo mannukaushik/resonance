@@ -1,10 +1,12 @@
 package com.resonance.controllers.impl;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -27,12 +29,12 @@ import com.resonance.service.processor.ServiceProcessor;
 public class OverviewController implements AbstractController{
 
 	@Autowired
-	@Qualifier(value="overviewServiceProcessor")
+	//@Qualifier(value="overviewServiceProcessor")
 	private ServiceProcessor<Overview> overviewServiceProcessor;
 	
 	
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	protected HttpEntity<?> postProducts(@Valid @RequestBody Overview overview, HttpServletResponse response){
+	protected HttpEntity<?> postOverview(@Valid @RequestBody Overview overview, HttpServletResponse response){
 		overviewServiceProcessor.postRequest(overview);
 		response.setHeader(HttpHeaders.ALLOW, "POST, OPTIONS");
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST, OPTIONS");
@@ -44,6 +46,7 @@ public class OverviewController implements AbstractController{
 		Overview overviewtObj = new Overview();
 		overviewtObj.setModelName(id);
 		overviewServiceProcessor.getResponseById(overviewtObj);
+		overviewtObj.add(linkTo(methodOn(OverviewController.class).getOverviewId(id, response)).withSelfRel());
 		response.setHeader(HttpHeaders.ALLOW, "GET, OPTIONS");
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, OPTIONS");
 		return new ResponseEntity<>(overviewtObj, HttpStatus.OK);
