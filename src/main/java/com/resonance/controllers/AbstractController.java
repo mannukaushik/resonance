@@ -15,7 +15,7 @@ public interface AbstractController {
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "True");
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Location,Link,ETag");
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS,
-				"Origin, X-Requested-With, Content-Type, Accept,username,x-ibm-client-id,x-ibm-client-secret,iPlanetDirectoryPro");
+				"Origin, Content-Type, Accept");
 		response.setHeader(HttpHeaders.CONTENT_LANGUAGE, "en");
 		response.setHeader(HttpHeaders.LOCATION, request.getRequestURL().toString());
 		response.addHeader(HttpHeaders.ACCEPT_ENCODING, "gzip, deflate, sdch");

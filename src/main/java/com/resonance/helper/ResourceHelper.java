@@ -2,6 +2,7 @@ package com.resonance.helper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,16 +43,17 @@ public abstract class ResourceHelper<ModelImpl extends Model, Rq, T extends Obje
 		optionsLink.setMethod(methodName);
 		optionsLink.setTitle(title);
 		optionsLink.setRel(rel);
-		generateSchema(optionsLink, className);
-		return optionsLink;
-	}
-	private void generateSchema(OptionsLink optionsLink, Class<ModelImpl> className) {
 		try {
-			schemGenerator.SchemaGeneratorHandler(className, "");
+			optionsLink.setSchema(generateSchema(optionsLink, className));
 		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return optionsLink;
+	}
+	private Map<String, Object> generateSchema(OptionsLink optionsLink, Class<ModelImpl> className) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		 return schemGenerator.SchemaGeneratorHandler(className, "");
 	}
 
 }

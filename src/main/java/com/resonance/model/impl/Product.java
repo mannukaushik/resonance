@@ -19,16 +19,19 @@ public class Product extends ResourceSupport implements Serializable,Model {
 	private String price;
 	@SummaryProperty
 	private String imgSrc;
+	@SummaryProperty
+	private String type;
 	
 	public Product() {
 		super();
 	}
 
-	public Product(String modelName, String price, String imgSrc) {
+	public Product(String modelName, String price, String imgSrc, String type) {
 		super();
 		this.modelName = modelName;
 		this.price = price;
 		this.imgSrc = imgSrc;
+		this.type = type;
 	}
 
 	public String getImgSrc() {
@@ -54,6 +57,14 @@ public class Product extends ResourceSupport implements Serializable,Model {
 
 	public void setModelName(String modelName) {
 		this.modelName = modelName;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String generateIdFromModel() {

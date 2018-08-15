@@ -16,24 +16,23 @@ public class ProductTo implements MongoEntity{
 	private String modelName;
 	private String price;
 	private String imgSrc;	
+	private String type;
 	
 	public ProductTo() {
 		super();
 	}
-	
-	
-
 
 	public ProductTo(String modelName) {
 		super();
 		this.modelName = modelName;
 	}
 
-	public ProductTo(String modelName, String price, String imgSrc) {
+	public ProductTo(String modelName, String price, String imgSrc, String type) {
 		super();
 		this.modelName = modelName;
 		this.price = price;
 		this.imgSrc = imgSrc;
+		this.type = type;
 	}
 
 
@@ -66,4 +65,19 @@ public class ProductTo implements MongoEntity{
 		this.imgSrc = imgSrc;
 	}
 
+
+
+
+	public String getType() {
+		return type;
+	}
+
+
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	
 }
