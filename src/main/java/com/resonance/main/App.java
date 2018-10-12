@@ -16,7 +16,7 @@ import com.resonance.entities.User;
 import com.resonance.security.config.CustomUserDetails;
 import com.resonance.service.processor.UserService;
 
-@SpringBootApplication(scanBasePackages= {"com.resonance.controllers.impl","com.resonance.controllers", "com.resonance.configuration", "com.resonance.service.processor", "com.resonance.service.processor.impl","com.resonance.data.configuration","com.resonance.helper", "com.resonance.helper.generic", "com.resonance.api.elements", "com.resonance.api.tests", "com.resonance.security.config","com.resonance.commons.filter"}, exclude={MongoAutoConfiguration.class})
+@SpringBootApplication(scanBasePackages= {"com.resonance.controllers.impl","com.resonance.controllers", "com.resonance.configuration", "com.resonance.service.processor", "com.resonance.service.processor.impl","com.resonance.data.configuration","com.resonance.helper", "com.resonance.helper.generic", "com.resonance.api.elements", "com.resonance.api.tests", "com.resonance.security.config","com.resonance.commons.filter","com.resonance.exception.handler"}, exclude={MongoAutoConfiguration.class})
 public class App {
 
 	@Autowired

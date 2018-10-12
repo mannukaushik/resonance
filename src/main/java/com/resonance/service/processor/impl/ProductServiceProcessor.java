@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.resonance.api.elements.DataNotFoundException;
 import com.resonance.data.repo.ProductRepository;
 import com.resonance.entities.ProductTo;
 import com.resonance.model.impl.Product;
@@ -51,6 +52,9 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 	
 	public Product getResponseById(Product productObj) {
 		ProductTo productTo = productRepoObj.findUnique(productObj.getModelName());
+		if(null==productTo) {
+			throw new DataNotFoundException("No data found");
+		}
 		productObj.setModelName(productTo.getModelName());
 		productObj.setPrice(productTo.getPrice());
 		productObj.setImgSrc(productTo.getImgSrc());

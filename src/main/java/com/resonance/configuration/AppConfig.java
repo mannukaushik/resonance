@@ -10,6 +10,7 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,19 +18,14 @@ import com.resonance.api.elements.JacksonUtils;
 import com.resonance.api.elements.SchemaGenerator;
 import com.resonance.helper.generic.ProductHelper;
 import com.resonance.helper.generic.SpecificationHelper;
-import com.resonance.service.processor.impl.ProductServiceProcessor;
 
 @Configuration
 @EnableSpringDataWebSupport
 @EnableAutoConfiguration
+@EnableWebSecurity
 @EnableHypermediaSupport(type = {HypermediaType.HAL})
 public class AppConfig  extends WebSecurityConfigurerAdapter implements WebMvcConfigurer{
 
-	@Bean(name= "productServiceProcessor")
-	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-	public ProductServiceProcessor productServiceProcessor() {
-		return new ProductServiceProcessor();
-	}
 	@Bean
 	@Scope(value=ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	public JacksonUtils jacksonUtils() {

@@ -11,7 +11,7 @@ import com.resonance.model.Model;
 @SuppressWarnings("serial")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Product extends ResourceSupport implements Serializable,Model {
-		
+	
 	@SummaryProperty
 	private String modelName;
 	@SummaryProperty

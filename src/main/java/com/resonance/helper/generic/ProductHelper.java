@@ -21,16 +21,18 @@ public class ProductHelper extends ResourceHelper<Product, HttpServletRequest, S
 	public static final String PRODUCT_RESOURCE_POST_TITLE = "Creates a new product";
 	public static final String PRODUCT_RESOURCE_GET_ID_TITLE = "Fetches the product from the Id";
 	public static final String PRODUCT_RESOURCE_DELETE_TITLE = "Deletes the product based on the Id";
+	public static final String PRODUCT_RESOURCE_GET_TITLE_SOUNDBAR = "Returns all the sound bars";
 	
 	@Override
 	public OptionsResponseEntity getResourceResponse(HttpServletRequest request, Class<Product> modelClass) {
 		
 		OptionsResponseEntity optionsResponseEntity = new OptionsResponseEntity();
 		Options _options = new Options();
-
+		
 		optionsResponseEntity.setTitle(PRODUCT_TITLE);
 		_options.getLinks().add(addCollectionOptionsLink(request.getRequestURL().toString(), RequestMethod.GET.name(), PRODUCT_RESOURCE_GET_TITLE, StringConstants.GET_REL, Product.class));
 		_options.getLinks().add(addCollectionOptionsLink(request.getRequestURL().toString(), RequestMethod.POST.name(), PRODUCT_RESOURCE_POST_TITLE, StringConstants.POST_REL, Product.class));
+		_options.getLinks().add(addCollectionOptionsLink(request.getRequestURL().toString()+"?type=soundBar", RequestMethod.GET.name(), PRODUCT_RESOURCE_GET_TITLE_SOUNDBAR, StringConstants.GET_SOUNDBAR_REL, Product.class));
 		optionsResponseEntity.setOptions(_options);
 		optionsResponseEntity.add(linkTo(methodOn(ProductController.class).optionsOnProducts(request, null)).withSelfRel().expand());
 		return optionsResponseEntity;

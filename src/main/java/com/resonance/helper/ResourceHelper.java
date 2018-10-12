@@ -23,12 +23,13 @@ public abstract class ResourceHelper<ModelImpl extends Model, Rq, T extends Obje
 	public void getCollectionResults(Collection collectionObj, String title, String name, String href, Class<ModelImpl> className, List<ModelImpl> results) throws Throwable {
 		Set<String> properties = JacksonUtils.getSummaryProperties(className);
 		for(int i=0; i<results.size();i++) {
+			String url = href+"/"+results.get(i).generateIdFromModel();
 			Item item = new Item();
-			item.setHref(href);
+			item.setHref(url);
 			item.setTitle(title);
 			item.setName(name);
 			item.setSummary(JacksonUtils.publishSummaryObject(results.get(i), className,properties));
-			collectionObj.add(new LinkSummary(href, "item", item.getSummary()));
+			collectionObj.add(new LinkSummary(url, "item", item.getSummary()));
 		}
 	}
 	public abstract OptionsResponseEntity getResourceResponse(Rq rq, Class<ModelImpl> modelClass);

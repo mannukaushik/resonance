@@ -37,8 +37,8 @@ import com.resonance.service.processor.ServiceProcessor;
 @RestController
 @RequestMapping("/products")
 public class ProductController implements AbstractController {
-
-	@Autowired
+	
+	@Autowired 
 	@Qualifier(value="productServiceProcessor")
 	private ServiceProcessor<Product> productServiceProcessor;
 	
@@ -61,7 +61,7 @@ public class ProductController implements AbstractController {
 		Product productObj = new Product();
 		productObj.setType(type);
 		List<Product> productList = productServiceProcessor.getResponse(productObj, page, size);
-		collectionObj.add(linkTo(methodOn(ProductController.class).getProducts(page, size, modelName, price, type, request, response)).withSelfRel().expand());
+		collectionObj.add(linkTo(methodOn(ProductController.class).getProducts(page, size, modelName, price, type, request, response)).slash(productObj.generateIdFromModel()).withSelfRel().expand());
 		productHelper.getCollectionResults(collectionObj, "gets a product resource", "product", request.getRequestURL().toString(), Product.class, productList);
 		response.setHeader(HttpHeaders.ALLOW, "GET, OPTIONS");
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, OPTIONS");
