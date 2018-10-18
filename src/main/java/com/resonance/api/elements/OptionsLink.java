@@ -1,6 +1,7 @@
 package com.resonance.api.elements;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,6 +14,7 @@ public class OptionsLink {
 	private String method;
 	private String rel;
 	private String href;
+	private List<String> type;
 	private Map<String,Object> schema;
 
 	public OptionsLink() {
@@ -22,13 +24,14 @@ public class OptionsLink {
 	@JsonCreator
 	public OptionsLink(@JsonProperty("title") String title, @JsonProperty("method") String method,
 			@JsonProperty("href") String href, @JsonProperty("rel") String rel,
-			@JsonProperty("schema") HashMap<String,Object> schema) {
+			@JsonProperty("schema") HashMap<String,Object> schema, @JsonProperty("type") List<String> type) {
 		super();
 		this.title = title;
 		this.method = method;
 		this.rel = rel;
 		this.href = href;
 		this.schema = schema;
+		this.type = type;
 	}
 
 	public Map<String, Object> getSchema() {
@@ -69,5 +72,13 @@ public class OptionsLink {
 
 	public void setMethod(String method) {
 		this.method = method;
+	}
+
+	public List<String> getType() {
+		return type;
+	}
+
+	public void setType(List<String> type) {
+		this.type = type;
 	}
 }
