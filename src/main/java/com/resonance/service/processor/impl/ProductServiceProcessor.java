@@ -44,7 +44,7 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 	private List<Product> fetchProductList(Product productObj, Iterable<ProductTo> productToList){
 		List<Product> productList = new ArrayList<Product>();
 		for(ProductTo productTo : productToList) {
-			productObj = new Product(productTo.getModelName(), productTo.getImgSrc(), productTo.getPrice(),productTo.getType());
+			productObj = new Product(productTo.getModelName(), productTo.getPrice(), productTo.getImgSrc(), productTo.getType());
 			productList.add(productObj);
 		}
 		return productList;
@@ -63,7 +63,8 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 	}
 
 	public void postRequest(Product productObj) {		
-		ProductTo productTo = new ProductTo(productObj.getModelName(), productObj.getPrice(), productObj.getImgSrc(),productObj.getType());
+
+		ProductTo productTo = new ProductTo(productObj.getModelName(), productObj.getPrice(), productObj.getImgSrc(), productObj.getType());
 		productRepoObj.save(productTo);
 	}
 

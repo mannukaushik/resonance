@@ -21,7 +21,7 @@ public class ProductTo implements MongoEntity{
 	public ProductTo() {
 		super();
 	}
-	
+
 	public ProductTo(String modelName) {
 		super();
 		this.modelName = modelName;
@@ -64,15 +64,9 @@ public class ProductTo implements MongoEntity{
 		this.imgSrc = imgSrc;
 	}
 
-
-
-
 	public String getType() {
 		return type;
 	}
-
-
-
 
 	public void setType(String type) {
 		this.type = type;

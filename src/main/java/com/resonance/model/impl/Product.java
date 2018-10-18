@@ -65,7 +65,7 @@ public class Product extends ResourceSupport implements Serializable,Model {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	public String generateIdFromModel() {
 		return this.modelName;
 	}

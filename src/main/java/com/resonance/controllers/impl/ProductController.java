@@ -61,6 +61,7 @@ public class ProductController implements AbstractController {
 		Product productObj = new Product();
 		productObj.setType(type);
 		List<Product> productList = productServiceProcessor.getResponse(productObj, page, size);
+
 		collectionObj.add(linkTo(methodOn(ProductController.class).getProducts(page, size, modelName, price, type, request, response)).slash(productObj.generateIdFromModel()).withSelfRel().expand());
 		productHelper.getCollectionResults(collectionObj, "gets a product resource", "product", request.getRequestURL().toString(), Product.class, productList);
 		response.setHeader(HttpHeaders.ALLOW, "GET, OPTIONS");

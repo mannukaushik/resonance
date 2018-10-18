@@ -2,6 +2,7 @@ package com.resonance.data.repo;
 
 import java.util.List;
 
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -19,5 +20,6 @@ public interface ProductRepository extends MongoRepository<ProductTo, String> {
 	
 	@Query(value = "{'type': ?0}")
 	public Page<ProductTo> findPagedTypes(String type, Pageable pageable);
+
 
 }

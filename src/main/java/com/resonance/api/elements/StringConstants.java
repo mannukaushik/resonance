@@ -6,5 +6,7 @@ public class StringConstants {
 	public final static String POST_REL = "create";
 	public final static String GET_ID_REL = "fetch";
 	public final static String DELETE_REL = "delete";
-	public final static String GET_SOUNDBAR_REL = "soundBar";
+	public final static String SOUNDBARS = "soundBars";
+	public final static String HOMETHEATERS = "homeTheaters";
+
 }
