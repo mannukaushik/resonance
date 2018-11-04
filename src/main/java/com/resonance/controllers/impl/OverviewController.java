@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.resonance.controllers.AbstractController;
@@ -23,7 +24,7 @@ import com.resonance.model.impl.Overview;
 import com.resonance.service.processor.ServiceProcessor;
 
 @RestController
-@RequestMapping("/overview")
+@RequestMapping("/products/{Id}/overview")
 public class OverviewController implements AbstractController{
 
 	@Autowired
@@ -58,4 +59,14 @@ public class OverviewController implements AbstractController{
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "DELETE, OPTIONS");
 		return new ResponseEntity<>(overviewObj, HttpStatus.NO_CONTENT);
 	}
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	protected HttpEntity<?> getOverview(@RequestParam(required=false) Integer page, @RequestParam(required=false) Integer size, HttpServletResponse response) throws Throwable{
+		Overview overviewObj = new Overview();
+		overviewServiceProcessor.getResponse(overviewObj, page, size);
+		response.setHeader(HttpHeaders.ALLOW, "GET, OPTIONS");
+		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, OPTIONS");
+		return new ResponseEntity<>(overviewObj, HttpStatus.OK);
+	}
+	
+	
 }

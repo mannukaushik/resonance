@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
@@ -40,15 +41,18 @@ public class ProductControllerTest {
 	@Mock
 	private ServiceProcessor<Product> productServiceProcessor;
 	
-	Product product = new Product();
+	
 
 	@Before
 	public void setup() {
+		Product product = Mockito.mock(Product.class);
 		MockitoAnnotations.initMocks(this);
 		mockMvc = MockMvcBuilders.standaloneSetup(productController).build();
+		product.setModelName("Maharaja");
 		product.setImgSrc("C:/Users/images");
 		product.setPrice("8000");
-		product.setModelName("Maharaja");
+		product.setType("soundBars");
+		
 	}
 	
 	@Test
@@ -60,11 +64,13 @@ public class ProductControllerTest {
 	@Test
 	public void testPostData() throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
+		Product product = new Product();
 		 mockMvc.perform(post("/products").content(mapper.writeValueAsString(product)).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isCreated())
 		.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
 		.andExpect(jsonPath("modelName",is("Maharaja")))
 		.andExpect(jsonPath("imgSrc",is("C:/Users/images")))
-		.andExpect(jsonPath("price",is("8000")));
+		.andExpect(jsonPath("price",is("8000")))
+		.andExpect(jsonPath("type",is("soundBars")));
 		
 		
 	}

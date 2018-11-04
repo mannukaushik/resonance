@@ -14,11 +14,17 @@ public class Overview extends ResourceSupport implements Serializable,Model {
 	@SummaryProperty
 	private String modelName;
 	@SummaryProperty
-	private String descriptionHeader;
-	@SummaryProperty
 	private String description;
 	@SummaryProperty
-	private String imgSrc;
+	private String bluetooth;
+	@SummaryProperty
+	private String subWoofer;
+	@SummaryProperty
+	private String blueRay;
+	@SummaryProperty
+	private String dvdPlayback;
+	@SummaryProperty
+	private String power;
 	
 	public Overview() {
 		super();
@@ -31,15 +37,7 @@ public class Overview extends ResourceSupport implements Serializable,Model {
 	public void setModelName(String modelName) {
 		this.modelName = modelName;
 	}
-
-	public String getDescriptionHeader() {
-		return descriptionHeader;
-	}
-
-	public void setDescriptionHeader(String descriptionHeader) {
-		this.descriptionHeader = descriptionHeader;
-	}
-
+	
 	public String getDescription() {
 		return description;
 	}
@@ -48,12 +46,44 @@ public class Overview extends ResourceSupport implements Serializable,Model {
 		this.description = description;
 	}
 
-	public String getImgSrc() {
-		return imgSrc;
+	public String getBluetooth() {
+		return bluetooth;
 	}
 
-	public void setImgSrc(String imgSrc) {
-		this.imgSrc = imgSrc;
+	public void setBluetooth(String bluetooth) {
+		this.bluetooth = bluetooth;
+	}
+
+	public String getSubWoofer() {
+		return subWoofer;
+	}
+
+	public void setSubWoofer(String subWoofer) {
+		this.subWoofer = subWoofer;
+	}
+
+	public String getBlueRay() {
+		return blueRay;
+	}
+
+	public void setBlueRay(String blueRay) {
+		this.blueRay = blueRay;
+	}
+
+	public String getDvdPlayback() {
+		return dvdPlayback;
+	}
+
+	public void setDvdPlayback(String dvdPlayback) {
+		this.dvdPlayback = dvdPlayback;
+	}
+
+	public String getPower() {
+		return power;
+	}
+
+	public void setPower(String power) {
+		this.power = power;
 	}
 
 	public String generateIdFromModel() {

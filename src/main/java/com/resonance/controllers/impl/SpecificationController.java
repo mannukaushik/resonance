@@ -34,7 +34,7 @@ import com.resonance.model.impl.Specification;
 import com.resonance.service.processor.ServiceProcessor;
 
 @RestController
-@RequestMapping("/specifications")
+@RequestMapping("/products/{Id}/specifications")
 public class SpecificationController implements AbstractController {
 	
 	@Autowired

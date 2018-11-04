@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.resonance.api.elements.Collection;
 import com.resonance.api.elements.OptionsResponseEntity;
+import com.resonance.api.elements.StringConstants;
 import com.resonance.controllers.AbstractController;
 import com.resonance.helper.generic.ProductHelper;
 import com.resonance.model.impl.Product;
@@ -74,8 +75,10 @@ public class ProductController implements AbstractController {
 		Product productObj = new Product();
 		productObj.setModelName(id);
 	    productServiceProcessor.getResponseById(productObj);
-	    productObj.add(linkTo(methodOn(ProductController.class).getProductsId(id, response)).withSelfRel());
-		response.setHeader(HttpHeaders.ALLOW, "GET, OPTIONS");
+	    productObj.add(linkTo(methodOn(ProductController.class).getProductsId(id, response)).withSelfRel(), linkTo(methodOn(ProductController.class).getProductsId(id, response)).slash(StringConstants.OVERVIEW).withRel("overview"));
+	    
+		
+	    response.setHeader(HttpHeaders.ALLOW, "GET, OPTIONS");
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, OPTIONS");
 		return new ResponseEntity<>(productObj, HttpStatus.OK);
 	}

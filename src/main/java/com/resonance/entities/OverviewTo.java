@@ -13,9 +13,12 @@ public class OverviewTo implements MongoEntity{
 	@Id
 	@Indexed
 	private String modelName;
-	private String descriptionHeader;
 	private String description;
-	private String imgSrc;
+	private String bluetooth;
+	private String subWoofer;
+	private String blueRay;
+	private String dvdPlayback;
+	private String power;
 	
 	public OverviewTo() {
 		super();
@@ -26,36 +29,70 @@ public class OverviewTo implements MongoEntity{
 		this.modelName = modelName;
 	}
 	
-	public OverviewTo(String modelName, String descriptionHeader, String description, String imgSrc) {
+	
+	public OverviewTo(String modelName, String description, String bluetooth, String subWoofer, String blueRay,
+			String dvdPlayback, String power) {
 		super();
 		this.modelName = modelName;
-		this.descriptionHeader = descriptionHeader;
 		this.description = description;
-		this.imgSrc = imgSrc;
+		this.bluetooth = bluetooth;
+		this.subWoofer = subWoofer;
+		this.blueRay = blueRay;
+		this.dvdPlayback = dvdPlayback;
+		this.power = power;
 	}
-	
+
 	public String getModelName() {
 		return modelName;
 	}
 	public void setModelName(String modelName) {
 		this.modelName = modelName;
 	}
-	public String getDescriptionHeader() {
-		return descriptionHeader;
-	}
-	public void setDescriptionHeader(String descriptionHeader) {
-		this.descriptionHeader = descriptionHeader;
-	}
+	
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getImgSrc() {
-		return imgSrc;
+
+	public String getBluetooth() {
+		return bluetooth;
 	}
-	public void setImgSrc(String imgSrc) {
-		this.imgSrc = imgSrc;
+
+	public void setBluetooth(String bluetooth) {
+		this.bluetooth = bluetooth;
+	}
+
+	public String getSubWoofer() {
+		return subWoofer;
+	}
+
+	public void setSubWoofer(String subWoofer) {
+		this.subWoofer = subWoofer;
+	}
+
+	public String getBlueRay() {
+		return blueRay;
+	}
+
+	public void setBlueRay(String blueRay) {
+		this.blueRay = blueRay;
+	}
+
+	public String getDvdPlayback() {
+		return dvdPlayback;
+	}
+
+	public void setDvdPlayback(String dvdPlayback) {
+		this.dvdPlayback = dvdPlayback;
+	}
+
+	public String getPower() {
+		return power;
+	}
+
+	public void setPower(String power) {
+		this.power = power;
 	}
 }

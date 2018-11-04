@@ -1,5 +1,6 @@
 package com.resonance.service.processor.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,35 @@ public class OverviewServiceProcessor implements ServiceProcessor<Overview> {
 	private OverviewRepository overviewRepoObj;
 	
 	@Override
-	public List<Overview> getResponse(Overview model, Integer page, Integer size) {
-		return null;
+	public List<Overview> getResponse(Overview overview, Integer page, Integer size) {
+		List<OverviewTo> overviewToList = overviewRepoObj.findAll();
+		List<Overview> overviewList = new ArrayList<>();
+		overviewToList.forEach((overviewTo)->
+		{
+			overview.setModelName(overviewTo.getModelName());
+			overview.setDescription(overviewTo.getDescription());
+			overview.setBluetooth(overviewTo.getBluetooth());
+			overview.setDvdPlayback(overviewTo.getDvdPlayback());
+			overview.setBlueRay(overviewTo.getBlueRay());
+			overview.setPower(overviewTo.getModelName());
+			overview.setSubWoofer(overviewTo.getSubWoofer());
+			overviewList.add(overview);
+		});
+		
+		return overviewList;
 	}
 
 	@Override
 	public Model getResponseById(Overview overviewObj) {
 		OverviewTo overviewTo = overviewRepoObj.findUnique(overviewObj.getModelName());
 		overviewObj.setModelName(overviewTo.getModelName());
-		overviewObj.setDescriptionHeader(overviewTo.getDescriptionHeader());
 		overviewObj.setDescription(overviewTo.getDescription());
-		overviewObj.setImgSrc(overviewTo.getImgSrc());
 		return overviewObj;
 	}
 
 	@Override
 	public void postRequest(Overview overviewObj) {
-		OverviewTo overviewTo = new OverviewTo(overviewObj.getModelName(), overviewObj.getDescriptionHeader(), overviewObj.getDescription(), overviewObj.getImgSrc());
+		OverviewTo overviewTo = new OverviewTo(overviewObj.getModelName(), overviewObj.getDescription(), overviewObj.getBluetooth(), overviewObj.getSubWoofer(), overviewObj.getBlueRay(), overviewObj.getDvdPlayback(), overviewObj.getPower());
 		overviewRepoObj.save(overviewTo);
 	}
 
