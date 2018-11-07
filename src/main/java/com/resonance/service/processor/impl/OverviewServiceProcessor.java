@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.resonance.data.repo.OverviewRepository;
@@ -21,7 +23,17 @@ public class OverviewServiceProcessor implements ServiceProcessor<Overview> {
 	
 	@Override
 	public List<Overview> getResponse(Overview overview, Integer page, Integer size) {
+		
+		if(page!=null && size!=null) {
+			Page<OverviewTo> overviewToList = overviewRepoObj.findPagedList(PageRequest.of(page, size));
+			return fetchOverview(overviewToList, overview);
+		}
+		else {
 		List<OverviewTo> overviewToList = overviewRepoObj.findAll();
+		return fetchOverview(overviewToList, overview);
+		
+	}}
+	private List<Overview> fetchOverview(Iterable<OverviewTo>  overviewToList, Overview overview){
 		List<Overview> overviewList = new ArrayList<>();
 		overviewToList.forEach((overviewTo)->
 		{

@@ -33,7 +33,8 @@ public class OverviewController implements AbstractController{
 	
 	
 	@PostMapping(consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
-	protected HttpEntity<?> postProducts(@Valid @RequestBody Overview overview, HttpServletResponse response){
+	protected HttpEntity<?> postProducts(@PathVariable("Id") String id, @Valid @RequestBody Overview overview, HttpServletResponse response){
+		overview.setModelName(id);
 		overviewServiceProcessor.postRequest(overview);
 		response.setHeader(HttpHeaders.ALLOW, "POST, OPTIONS");
 		response.setHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "POST, OPTIONS");

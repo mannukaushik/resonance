@@ -22,16 +22,16 @@ public class ProductServiceProcessor implements ServiceProcessor<Product> {
 	private ProductRepository productRepoObj;
 	
 	public List<Product> getResponse(Product productObj, Integer page, Integer size) {
-		Optional<String> productOptionalObj = Optional.ofNullable(productObj.getType());
-		if(page!=null && size!=null && !productOptionalObj.isPresent()) {
+		Optional<String> productOptionaltype = Optional.ofNullable(productObj.getType());
+		if(page!=null && size!=null && !productOptionaltype.isPresent()) {
 			Page<ProductTo> productToList = productRepoObj.findAll(PageRequest.of(page, size));
 			return fetchProductList(productObj, productToList);
 		}
-		else if(page != null && size != null && productOptionalObj.isPresent()) {
+		else if(page != null && size != null && productOptionaltype.isPresent()) {
 			Page<ProductTo> productToList = productRepoObj.findPagedTypes(productObj.getType(),PageRequest.of(page, size));
 			return fetchProductList(productObj, productToList);
 		}
-		else if(productOptionalObj.isPresent()){
+		else if(productOptionaltype.isPresent()){
 			List<ProductTo> productToList = productRepoObj.findTypes(productObj.getType());
 			return fetchProductList(productObj, productToList);
 		}
